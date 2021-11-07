@@ -54,23 +54,10 @@ public class sceneManager : MonoBehaviour
             }
 
         }
+        print(black.color.a);
 
     }
-    IEnumerator LoadYourAsyncScene(string scene)
-    {
-        
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
-        
 
-        // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-
-            yield return null;
-        }
-
-
-    }
     IEnumerator LoadBattle()
     {
         print("hello");
