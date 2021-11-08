@@ -1057,6 +1057,7 @@ GameObject:
   - component: {fileID: 1198635363}
   - component: {fileID: 1198635362}
   - component: {fileID: 1198635361}
+  - component: {fileID: 1198635365}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1145,6 +1146,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1198635365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198635360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c657d0b9e01dc8a4297e43e456b57c10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1492388213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1721,6 +1734,13 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a3f26ee8d7a9c4f4c82760682e84c4d6, type: 2}
   - {fileID: 2100000, guid: 98becafa0dc3cd44c8d07ed4b337bea1, type: 2}
   - {fileID: 2100000, guid: 803e41b1d4325a74894141fa220e44e4, type: 2}
+  whiteTeamFighter: {x: 0, y: 0}
+  BlackTeamFighter: {x: 0, y: 0}
+  StartedFight: {x: 0, y: 0}
+  EnPassantPosition: {x: 0, y: 0}
+  loserCombat: {x: 0, y: 0}
+  winnerCombat: {x: 0, y: 0}
+  attack: 0
 --- !u!23 &7718390322610190022
 MeshRenderer:
   m_ObjectHideFlags: 0

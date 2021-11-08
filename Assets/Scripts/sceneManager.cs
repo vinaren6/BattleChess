@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class sceneManager : MonoBehaviour
 {
-    private static sceneManager instance;
+    public static sceneManager instance;
     public Image black;
     public Animator anim;
 
@@ -54,13 +54,10 @@ public class sceneManager : MonoBehaviour
             }
 
         }
-        print(black.color.a);
-
     }
 
-    IEnumerator LoadBattle()
+    public IEnumerator LoadBattle()
     {
-        print("hello");
         anim.SetBool("Fade", true);
         yield return new WaitUntil(() => black.color.a == 1);
         SceneManager.LoadScene("Battle");
@@ -68,13 +65,18 @@ public class sceneManager : MonoBehaviour
         anim.SetBool("Fade", false);
         running = false;
     }
-    IEnumerator LoadChess()
+    public IEnumerator LoadChess()
     {
         anim.SetBool("Fade", true);
         yield return new WaitUntil(() => black.color.a == 1);
         SceneManager.LoadScene("Chess");
+        AsyncOperation test = SceneManager.LoadSceneAsync("Chess");
         Chessboard.instance.gameObject.SetActive(true);
+      
+        
         anim.SetBool("Fade", false);
+
+        Chessboard.instance.afterCombat();
         running = false;
     }
 }

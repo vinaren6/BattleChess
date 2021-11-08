@@ -61,6 +61,10 @@ public class Pawn : ChessPiece
         if (moveList.Count > 0)
         {
             Vector2Int[] lastMove = moveList[moveList.Count - 1];
+            if (board[lastMove[1].x, lastMove[1].y] == null)
+            {
+                return SpecialMove.None;
+            }
             if (board[lastMove[1].x, lastMove[1].y].type == ChessPieceType.Pawn)
             {
                 if (Mathf.Abs(lastMove[0].y - lastMove[1].y) == 2)
