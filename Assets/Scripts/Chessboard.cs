@@ -521,13 +521,15 @@ public class Chessboard : MonoBehaviour
         }
         return -Vector2Int.one; //Invalid
     }
+  
     public IEnumerable afterCombat()
     {
         Scene currentScene = SceneManager.GetActiveScene();
-        while (currentScene.name == "Chess")
-        {
-            currentScene = SceneManager.GetActiveScene();
-        }
+        // while (currentScene.name == "Chess")
+        // {
+        //    currentScene = SceneManager.GetActiveScene();
+        // }
+        
         //Enemy team
         ChessPiece winner = chessPieces[winnerCombat.x, winnerCombat.y];
         ChessPiece loser = chessPieces[loserCombat.x, loserCombat.y];
@@ -606,7 +608,7 @@ public class Chessboard : MonoBehaviour
         {
             chessPieces[x, y] = cp;
             chessPieces[previousPosition.x, previousPosition.y] = null;
-        
+
                 PositionSinglePiece(x, y);
 
             

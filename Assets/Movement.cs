@@ -7,6 +7,13 @@ public class Movement : MonoBehaviour
     public static bool battleOver;
     public int team;
     public float health;
+    public CharacterController controller;
+
+    float horizontalMove = 0;
+    public float runSpeed = 40f;
+    bool jump = false;
+
+    [SerializeField] GameObject groundCheck;
     public Movement(int team, float health)
     {
         this.team = team;
@@ -24,7 +31,12 @@ public class Movement : MonoBehaviour
         {
             if (team == 0)
             {
-                if (Input.GetKeyDown("e"))
+                horizontalMove = Input.GetAxisRaw("Horizontal White");
+                if (Input.GetButtonDown("Jump White"))
+                {
+                    jump = true;
+                }
+                    if (Input.GetKeyDown("e"))
                 {
                     health -= 20;
                 }
@@ -41,6 +53,13 @@ public class Movement : MonoBehaviour
             }
             else if (team == 1)
             {
+                horizontalMove = Input.GetAxisRaw("Horizontal Black");
+             
+                if (Input.GetButtonDown("Jump Black"))
+                {
+                    jump = true;
+                }
+
                 if (Input.GetKeyDown("e"))
                 {
                     health -= 10;
@@ -59,5 +78,11 @@ public class Movement : MonoBehaviour
                 
             }
         }
+    }
+    private void FixedUpdate()
+    {
+        print(horizontalMove);
+        controller.Move(horizontalMove * Time.fixedDeltaTime * runSpeed, false, jump);
+        jump = false;
     }
 }
