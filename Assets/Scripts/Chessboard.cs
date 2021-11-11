@@ -40,7 +40,8 @@ public class Chessboard : MonoBehaviour
     private Camera currentCamera;
     private Vector2Int currentHover;
     private Vector3 bounds;
-    private bool isWhiteTurn;
+    public bool isWhiteTurn;
+    private bool gameOver = false;
 
     public Vector2Int whiteTeamFighter;
     public Vector2Int BlackTeamFighter;
@@ -74,6 +75,10 @@ public class Chessboard : MonoBehaviour
     private void Update()
     {
         if (!gameObject.activeSelf)
+        {
+            return;
+        }
+        if (gameOver)
         {
             return;
         }
@@ -130,7 +135,6 @@ public class Chessboard : MonoBehaviour
                 bool validMove = MoveTo(currentlyDragging, hitPosition.x, hitPosition.y);
                 if (!validMove)
                 {
-                    print(specialMove);
                     if (specialMove == SpecialMove.None)
                     {
                         currentlyDragging.SetPosition(GetTileCenter(previousPosition.x, previousPosition.y));  
@@ -142,14 +146,8 @@ public class Chessboard : MonoBehaviour
                 RemoveHiglightTiles();
                 if (attack)
                 {
-                    print("loadBatlle");
                     StartCoroutine(sceneManager.instance.LoadBattle());
                 }
-                
-                //print("White team " + whiteTeamFighter);
-                //print("Black team " + BlackTeamFighter);
-                //print("startAttack " + StartedFight);
-                //print("EnPassant " + EnPassantPosition);
             }
         }
         else
@@ -328,6 +326,7 @@ public class Chessboard : MonoBehaviour
     //Checkmate
     private void CheckMate(int team)
     {
+        gameOver = true;
         DisplayVictory(team);
     }
     private void DisplayVictory(int winningTeam)
@@ -342,6 +341,7 @@ public class Chessboard : MonoBehaviour
         victoryScreen.SetActive(false);
 
         currentlyDragging = null;
+        gameOver = false;
         availableMoves.Clear();
         moveList.Clear();
 
@@ -400,8 +400,6 @@ public class Chessboard : MonoBehaviour
                 {
                     if (enemyPawn.team == 0)
                     {
-                        print("test");
-                        int direction = 1;
                         whiteTeamFighter = new Vector2Int(enemyPawn.currentX, enemyPawn.currentY);
                         BlackTeamFighter = new Vector2Int(myPawn.currentX, myPawn.currentY);
                         // deadWhites.Add(enemyPawn);
@@ -410,7 +408,6 @@ public class Chessboard : MonoBehaviour
                     }
                     else
                     {
-                        int direction = -1;
                         BlackTeamFighter = new Vector2Int(enemyPawn.currentX, enemyPawn.currentY);
                         whiteTeamFighter = new Vector2Int(myPawn.currentX, myPawn.currentY);
                        // deadBlacks.Add(enemyPawn);
@@ -533,7 +530,7 @@ public class Chessboard : MonoBehaviour
         //Enemy team
         ChessPiece winner = chessPieces[winnerCombat.x, winnerCombat.y];
         ChessPiece loser = chessPieces[loserCombat.x, loserCombat.y];
-        print(loser.team);
+
         if (loser.team == 0)
         {
             if (loser.type == ChessPieceType.King)

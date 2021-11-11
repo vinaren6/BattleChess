@@ -9,7 +9,7 @@ public class sceneManager : MonoBehaviour
     public Image black;
     public Animator anim;
 
-    private bool running = false;
+
 
     private void Awake()
     {
@@ -23,38 +23,7 @@ public class sceneManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-    private void Start()
-    {
 
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-           
-            if (!running)
-            {
-
-                running = true;
-                if (SceneManager.GetActiveScene().name == "Chess")
-                {
-                    
-
-                    StartCoroutine(LoadBattle());
-   
-
-
-                    
-
-                }
-                else
-                {
-                    StartCoroutine(LoadChess());
-                }
-            }
-
-        }
-    }
 
     public IEnumerator LoadBattle()
     {
@@ -63,20 +32,37 @@ public class sceneManager : MonoBehaviour
         SceneManager.LoadScene("Battle");
         Chessboard.instance.gameObject.SetActive(false);
         anim.SetBool("Fade", false);
-        running = false;
+
     }
     public IEnumerator LoadChess()
     {
         anim.SetBool("Fade", true);
         yield return new WaitUntil(() => black.color.a == 1);
         SceneManager.LoadScene("Chess");
-        AsyncOperation test = SceneManager.LoadSceneAsync("Chess");
         Chessboard.instance.gameObject.SetActive(true);
       
         
         anim.SetBool("Fade", false);
 
         Chessboard.instance.afterCombat();
-        running = false;
+
+    }
+    public void LoadChessFromMenu()
+    {
+
+        StartCoroutine(LoadChessFromMenuAnim());
+
+
+    }
+    private IEnumerator LoadChessFromMenuAnim()
+    {
+        anim.SetBool("Fade", true);
+        yield return new WaitUntil(() => black.color.a == 1);
+        SceneManager.LoadScene("Chess");
+        anim.SetBool("Fade", false);
+    }
+    public void Exit()
+    {
+        Application.Quit();
     }
 }
