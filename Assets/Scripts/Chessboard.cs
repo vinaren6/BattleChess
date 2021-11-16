@@ -430,6 +430,7 @@ public class Chessboard : MonoBehaviour
 
             if (targetPawn.type == ChessPieceType.Pawn)
             {
+                print(targetPawn.health);
                 if (targetPawn.team == 0 && lastMove[1].y == 7)
                 {
                     ChessPiece newQueen = SpawnSinglePiece(ChessPieceType.Queen, 0, targetPawn.health);

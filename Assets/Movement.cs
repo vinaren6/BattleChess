@@ -6,7 +6,6 @@ public class Movement : MonoBehaviour
 {
     public static bool battleOver;
     public int team;
-    public float health;
     public CharacterController controller;
 
     float horizontalMove = 0;
@@ -14,11 +13,7 @@ public class Movement : MonoBehaviour
     bool jump = false;
 
     [SerializeField] GameObject groundCheck;
-    public Movement(int team, float health)
-    {
-        this.team = team;
-        this.health = health;
-    }
+  
     void Start()
     {
         battleOver = false;
@@ -39,15 +34,7 @@ public class Movement : MonoBehaviour
                     jump = true;
                 }
      
-                if (health <= 0)
-                {
-                    battleOver = true;
-                    Chessboard.instance.winnerCombat = Chessboard.instance.BlackTeamFighter;
-                    Chessboard.instance.loserCombat = Chessboard.instance.whiteTeamFighter;
-                    Chessboard.instance.chessPieces[Chessboard.instance.winnerCombat.x, Chessboard.instance.winnerCombat.y].health = GameObject.Find("1 Team").GetComponent<Movement>().health;
-
-                    StartCoroutine(sceneManager.instance.LoadChess());
-                }
+           
             }
             else if (team == 1)
             {
@@ -59,15 +46,7 @@ public class Movement : MonoBehaviour
                 }
 
 
-                    if (health <= 0)
-                    {
-                        battleOver = true;
-                        Chessboard.instance.winnerCombat = Chessboard.instance.whiteTeamFighter;
-                        Chessboard.instance.loserCombat = Chessboard.instance.BlackTeamFighter;
-                        Chessboard.instance.chessPieces[Chessboard.instance.winnerCombat.x, Chessboard.instance.winnerCombat.y].health = GameObject.Find("0 Team").GetComponent<Movement>().health;
-
-                        StartCoroutine(sceneManager.instance.LoadChess());
-                    }
+                   
                 
             }
         }

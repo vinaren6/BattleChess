@@ -110,7 +110,7 @@ public class PlayerCombat : MonoBehaviour
                 battleOver = true;
                 Chessboard.instance.winnerCombat = Chessboard.instance.BlackTeamFighter;
                 Chessboard.instance.loserCombat = Chessboard.instance.whiteTeamFighter;
-                Chessboard.instance.chessPieces[Chessboard.instance.winnerCombat.x, Chessboard.instance.winnerCombat.y].health = GameObject.Find("1 Team").GetComponent<Movement>().health;
+                Chessboard.instance.chessPieces[Chessboard.instance.winnerCombat.x, Chessboard.instance.winnerCombat.y].health = GameObject.Find("1 Team").GetComponent<PlayerCombat>().health;
 
                 StartCoroutine(sceneManager.instance.LoadChess());
             }
@@ -123,7 +123,8 @@ public class PlayerCombat : MonoBehaviour
                 battleOver = true;
                 Chessboard.instance.winnerCombat = Chessboard.instance.whiteTeamFighter;
                 Chessboard.instance.loserCombat = Chessboard.instance.BlackTeamFighter;
-                Chessboard.instance.chessPieces[Chessboard.instance.winnerCombat.x, Chessboard.instance.winnerCombat.y].health = GameObject.Find("0 Team").GetComponent<Movement>().health;
+                print(GameObject.Find("0 Team").GetComponent<PlayerCombat>().health);
+                Chessboard.instance.chessPieces[Chessboard.instance.winnerCombat.x, Chessboard.instance.winnerCombat.y].health = GameObject.Find("0 Team").GetComponent<PlayerCombat>().health;
 
                 StartCoroutine(sceneManager.instance.LoadChess());
             }
